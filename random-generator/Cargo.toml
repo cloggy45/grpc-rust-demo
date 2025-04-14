@@ -1,0 +1,19 @@
+[package]
+name = "random-generator"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+description = "gRPC microservice that generates random data"
+
+[dependencies]
+tonic.workspace = true
+prost.workspace = true
+tokio.workspace = true
+rand.workspace = true
+dotenv.workspace = true
+log.workspace = true
+env_logger.workspace = true
+anyhow.workspace = true
+
+[build-dependencies]
+tonic-build = "0.10.2" 

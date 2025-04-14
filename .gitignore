@@ -1,0 +1,19 @@
+# Rust
+/target/
+**/*.rs.bk
+Cargo.lock
+
+# Docker
+.dockerignore
+.docker/
+docker-compose.override.yml
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Environment variables
+.env 

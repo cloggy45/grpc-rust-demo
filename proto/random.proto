@@ -1,0 +1,40 @@
+syntax = "proto3";
+package random;
+
+// Service definition for random data generation
+service RandomGenerator {
+  // Gets a random number between min and max (inclusive)
+  rpc GetRandomNumber(NumberRequest) returns (NumberResponse) {}
+  
+  // Gets a random string of specified length
+  rpc GetRandomString(StringRequest) returns (StringResponse) {}
+}
+
+// Request for getting a random number
+message NumberRequest {
+  int32 min = 1;
+  int32 max = 2;
+}
+
+// Response containing the random number
+message NumberResponse {
+  int32 number = 1;
+}
+
+// Request for getting a random string
+message StringRequest {
+  // Length of the random string to generate
+  int32 length = 1;
+  
+  // Type of characters to include:
+  // - 0: Alphanumeric (default)
+  // - 1: Alphabetic only
+  // - 2: Numeric only
+  // - 3: Special characters only
+  int32 char_type = 2;
+}
+
+// Response containing the random string
+message StringResponse {
+  string value = 1;
+} 

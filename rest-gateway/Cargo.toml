@@ -1,0 +1,21 @@
+[package]
+name = "rest-gateway"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+description = "REST API gateway that consumes the gRPC random generator service"
+
+[dependencies]
+tonic.workspace = true
+prost.workspace = true
+tokio.workspace = true
+axum.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+dotenv.workspace = true
+log.workspace = true
+env_logger.workspace = true
+anyhow.workspace = true
+
+[build-dependencies]
+tonic-build = "0.10.2" 

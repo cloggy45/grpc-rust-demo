@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # gRPC Random Generator Service
+  random-generator:
+    build:
+      context: .
+      dockerfile: random-generator/Dockerfile
+    environment:
+      - GRPC_HOST=0.0.0.0
+      - GRPC_PORT=50051
+      - RUST_LOG=info
+    # Expose ports for testing/debugging - can be commented out in production
+    ports:
+      - "50051:50051"
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "50051"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # REST API Gateway Service
+  rest-gateway:
+    build:
+      context: .
+      dockerfile: rest-gateway/Dockerfile
+    environment:
+      - REST_HOST=0.0.0.0
+      - REST_PORT=8080
+      - GENERATOR_HOST=random-generator
+      - GENERATOR_PORT=50051
+      - RUST_LOG=info
+    ports:
+      - "8080:8080"
+    depends_on:
+      random-generator:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "8080"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+# To run: docker-compose up --build 
